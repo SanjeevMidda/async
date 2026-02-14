@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import "./index.css";
 
 const USERS = [
@@ -16,6 +16,28 @@ const USERS = [
 function App() {
   const [userInput, setUserInput] = useState("");
   const [role, setRole] = useState("all");
+
+  // part 1: create fake API function
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  async function fetchUsers(shouldSucceed = USERS, wait = 2000) {
+    await delay(wait);
+
+    if (shouldSucceed) return shouldSucceed;
+    throw new Error(`${Math.random()} error!`);
+  }
+
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        const res = await fetchUsers();
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    loadUsers();
+  }, []);
 
   const handleInputChange = (e) => setUserInput(e.target.value);
 
