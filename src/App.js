@@ -16,6 +16,9 @@ const USERS = [
 function App() {
   const [userInput, setUserInput] = useState("");
   const [role, setRole] = useState("all");
+  const [users, setUsers] = useState(USERS);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // part 1: create fake API function
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
