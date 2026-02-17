@@ -9,8 +9,6 @@ const USERS = [
   { id: 3, name: "Charlie Brown", role: "User" },
 
   { id: 4, name: "Diana Prince", role: "Manager" },
-
-  { id: 5, name: "Jack Cork", role: "User" },
 ];
 
 function App() {
