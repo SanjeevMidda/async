@@ -37,6 +37,12 @@ function App() {
     .then((res) => console.log("Success:", res))
     .catch((err) => console.error("Failure:", err));
 
+  // part 3 - button triggered fetch
+  const loadUsers = () => {
+    setLoading(true);
+    setError("");
+  };
+
   // part 3
   // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -124,6 +130,8 @@ function App() {
           </div>
         </div>
       </div>
+
+      <button onClick={loadUsers}>load users</button>
     </div>
   );
 }
