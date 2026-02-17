@@ -33,16 +33,30 @@ function App() {
     });
   };
 
-  fetchUsers()
-    .then((res) => console.log("Success:", res))
-    .catch((err) => console.error("Failure:", err));
+  // fetchUsers()
+  //   .then((res) => console.log("Success:", res))
+  //   .catch((err) => console.error("Failure:", err));
+
+  //   fetchUsers()
 
   // part 3 - button triggered fetch
-  const loadUsers = () => {
+  const loadUsers = async () => {
     setLoading(true);
     setError("");
+
+    try {
+      const response = await fetchUsers();
+      setUsers(response);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
+  useEffect(() => {
+    loadUsers();
+  }, []);
   // part 3
   // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
