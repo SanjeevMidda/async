@@ -19,26 +19,45 @@ function App() {
   const [error, setError] = useState("");
 
   // part 1: create fake API function
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const fetchUsers = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const usersExist = false;
 
-  async function fetchUsers(shouldSucceed = USERS, wait = 2000) {
-    await delay(wait);
+        if (usersExist) {
+          resolve(USERS);
+        } else {
+          reject(new Error(`${Math.random()} error`));
+        }
+      }, 2000);
+    });
+  };
 
-    if (shouldSucceed) return shouldSucceed;
-    throw new Error(`${Math.random()} error!`);
-  }
+  fetchUsers()
+    .then((res) => console.log("Success:", res))
+    .catch((err) => console.error("Failure:", err));
 
-  useEffect(() => {
-    const loadUsers = async () => {
-      try {
-        const res = await fetchUsers();
-        console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    loadUsers();
-  }, []);
+  // part 3
+  // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  // async function fetchUsers(shouldSucceed = USERS, wait = 2000) {
+  //   await delay(wait);
+
+  //   if (shouldSucceed) return shouldSucceed;
+  //   throw new Error(`${Math.random()} error!`);
+  // }
+
+  // useEffect(() => {
+  //   const loadUsers = async () => {
+  //     try {
+  //       const res = await fetchUsers();
+  //       console.log(res);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   loadUsers();
+  // }, []);
 
   const handleInputChange = (e) => setUserInput(e.target.value);
 
